@@ -1,50 +1,50 @@
 # Shorty - URL Shortener API
 
-Uma API moderna e robusta para criar e gerenciar URLs curtas, construída com Laravel 11 e Sanctum para autenticação segura baseada em tokens.
+A modern and robust API for creating and managing shortened URLs, built with Laravel 11 and Sanctum for secure token-based authentication.
 
-## 📋 Funcionalidades
+## 📋 Features
 
-- ✅ Criar URLs curtas a partir de URLs longas
-- ✅ Gerar códigos únicos e aleatórios (6 caracteres)
-- ✅ Listar todas as URLs criadas
-- ✅ Recuperar informações de uma URL específica
-- ✅ Rastrear número de acessos por URL
-- ✅ Autenticação via API tokens (Sanctum)
-- ✅ Validação robusta de URLs
-- ✅ Prevenção de URLs duplicadas
+- ✅ Create shortened URLs from long URLs
+- ✅ Generate unique and random codes (6 characters)
+- ✅ List all created URLs
+- ✅ Retrieve information for a specific URL
+- ✅ Track the number of accesses per URL
+- ✅ API token authentication (Sanctum)
+- ✅ Robust URL validation
+- ✅ Prevention of duplicate URLs
 
-## 🛠️ Requisitos
+## 🛠️ Requirements
 
-- PHP 8.2 ou superior
+- PHP 8.2 or higher
 - Composer
 - Laravel 11
-- SQLite ou MySQL
-- Node.js (opcional, para assets)
+- SQLite or MySQL
+- Node.js (optional, for assets)
 
-## 📦 Instalação
+## 📦 Installation
 
-### 1. Clonar o repositório
+### 1. Clone the repository
 
 ```bash
 git clone <repository-url>
 cd shorty
 ```
 
-### 2. Instalar dependências
+### 2. Install dependencies
 
 ```bash
 composer install
 npm install
 ```
 
-### 3. Configurar variáveis de ambiente
+### 3. Configure environment variables
 
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-Edite o arquivo `.env` conforme necessário:
+Edit the `.env` file as needed:
 
 ```env
 APP_NAME="Shorty"
@@ -53,7 +53,7 @@ APP_DEBUG=true
 APP_URL=http://localhost:8000
 
 DB_CONNECTION=sqlite
-# ou para MySQL:
+# or for MySQL:
 # DB_CONNECTION=mysql
 # DB_HOST=127.0.0.1
 # DB_PORT=3306
@@ -62,47 +62,47 @@ DB_CONNECTION=sqlite
 # DB_PASSWORD=
 ```
 
-### 4. Executar migrações
+### 4. Run migrations
 
 ```bash
 php artisan migrate
 ```
 
-### 5. Iniciar o servidor de desenvolvimento
+### 5. Start the development server
 
 ```bash
 php artisan serve
 ```
 
-O servidor estará disponível em `http://localhost:8000`
+The server will be available at `http://localhost:8000`
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 shorty/
 ├── app/
 │   ├── Http/
 │   │   └── Controllers/
-│   │       └── UrlController.php       # Controller principal da API
+│   │       └── UrlController.php       # Main API controller
 │   ├── Models/
-│   │   └── Url.php                     # Model da URL com geração de código
+│   │   └── Url.php                     # URL model with code generation
 │   └── Providers/
-│       └── AppServiceProvider.php      # Configuração de serviços
+│       └── AppServiceProvider.php      # Service configuration
 ├── config/
-│   ├── app.php                         # Configuração da aplicação
-│   └── sanctum.php                     # Configuração de autenticação
+│   ├── app.php                         # Application configuration
+│   └── sanctum.php                     # Authentication configuration
 ├── database/
 │   ├── factories/
-│   │   └── UrlFactory.php              # Factory para testes
+│   │   └── UrlFactory.php              # Factory for tests
 │   ├── migrations/
 │   │   ├── 2026_04_24_155727_create_personal_access_tokens_table.php
 │   │   └── 2026_04_24_160002_create_urls_table.php
 │   └── seeders/
 │       └── DatabaseSeeder.php
 ├── routes/
-│   ├── api.php                         # Rotas da API
-│   └── web.php                         # Rotas web
-└── tests/                              # Testes automatizados
+│   ├── api.php                         # API routes
+│   └── web.php                         # Web routes
+└── tests/                              # Automated tests
 ```
 
 ## 🔌 API Endpoints
@@ -112,7 +112,7 @@ shorty/
 http://localhost:8000/api/url
 ```
 
-### 1. Listar todas as URLs
+### 1. List all URLs
 
 **Request:**
 ```http
@@ -138,7 +138,7 @@ GET /api/url
 
 ---
 
-### 2. Criar uma URL curta
+### 2. Create a shortened URL
 
 **Request:**
 ```http
@@ -151,7 +151,7 @@ Content-Type: application/json
 ```
 
 **Parameters:**
-- `url` (required, string, max: 2048): URL longa a ser encurtada. Deve ser uma URL válida e única.
+- `url` (required, string, max: 2048): Long URL to be shortened. Must be a valid and unique URL.
 
 **Response (201 Created):**
 ```json
@@ -165,13 +165,13 @@ Content-Type: application/json
 }
 ```
 
-**Possíveis erros:**
-- `422 Unprocessable Entity`: URL inválida ou já existe
-- `400 Bad Request`: Campo 'url' ausente
+**Possible errors:**
+- `422 Unprocessable Entity`: Invalid URL or URL already exists
+- `400 Bad Request`: 'url' field is missing
 
 ---
 
-### 3. Recuperar uma URL específica
+### 3. Retrieve a specific URL
 
 **Request:**
 ```http
@@ -179,7 +179,7 @@ GET /api/url/{id}
 ```
 
 **Parameters:**
-- `id` (required, integer): ID da URL
+- `id` (required, integer): URL ID
 
 **Response:**
 ```json
@@ -193,12 +193,12 @@ GET /api/url/{id}
 }
 ```
 
-**Possíveis erros:**
-- `404 Not Found`: URL com este ID não existe
+**Possible errors:**
+- `404 Not Found`: URL with this ID does not exist
 
 ---
 
-### 4. Atualizar uma URL
+### 4. Update a URL
 
 **Request:**
 ```http
@@ -211,8 +211,8 @@ Content-Type: application/json
 ```
 
 **Parameters:**
-- `id` (required, integer): ID da URL
-- `url` (optional, string): Nova URL para o registro
+- `id` (required, integer): URL ID
+- `url` (optional, string): New URL for the record
 
 **Response:**
 ```json
@@ -224,7 +224,7 @@ Content-Type: application/json
 
 ---
 
-### 5. Deletar uma URL
+### 5. Delete a URL
 
 **Request:**
 ```http
@@ -232,7 +232,7 @@ DELETE /api/url/{id}
 ```
 
 **Parameters:**
-- `id` (required, integer): ID da URL a deletar
+- `id` (required, integer): URL ID to delete
 
 **Response:**
 ```json
@@ -241,11 +241,11 @@ DELETE /api/url/{id}
 }
 ```
 
-## 🔐 Autenticação
+## 🔐 Authentication
 
-A API utiliza **Laravel Sanctum** para autenticação baseada em tokens.
+The API uses **Laravel Sanctum** for token-based authentication.
 
-### Gerar um token de acesso
+### Generate an access token
 
 ```bash
 php artisan tinker
@@ -257,9 +257,9 @@ $token = $user->createToken('api-token')->plainTextToken;
 echo $token;
 ```
 
-### Usar o token em requisições
+### Use the token in requests
 
-Adicione o header `Authorization` com o token Bearer:
+Add the `Authorization` header with the Bearer token:
 
 ```bash
 curl -X GET http://localhost:8000/api/url \
@@ -267,29 +267,29 @@ curl -X GET http://localhost:8000/api/url \
   -H "Content-Type: application/json"
 ```
 
-## 📊 Modelo de Dados
+## 📊 Data Model
 
-### Tabela: `urls`
+### Table: `urls`
 
-| Coluna | Tipo | Descrição |
-|--------|------|-----------|
-| `id` | bigint | ID único da URL |
-| `url` | string | URL original (máximo 2048 caracteres) |
-| `short_url` | string | Código único de 6 caracteres |
-| `access_count` | unsignedInteger | Número de acessos (padrão: 0) |
-| `created_at` | timestamp | Data de criação |
-| `updated_at` | timestamp | Data da última atualização |
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | bigint | Unique URL ID |
+| `url` | string | Original URL (maximum 2048 characters) |
+| `short_url` | string | Unique 6-character code |
+| `access_count` | unsignedInteger | Number of accesses (default: 0) |
+| `created_at` | timestamp | Creation date |
+| `updated_at` | timestamp | Last update date |
 
-### Geração automática de código curto
+### Automatic short code generation
 
-O código curto é gerado automaticamente quando uma URL é criada. O sistema:
+The short code is generated automatically when a URL is created. The system:
 
-1. Gera um código aleatório de 6 caracteres
-2. Verifica se já existe no banco de dados
-3. Se existir, regenera até encontrar um código único
+1. Generates a random 6-character code
+2. Checks if it already exists in the database
+3. If it exists, regenerates until finding a unique code
 
 ```php
-// Gerado automaticamente no Model Url
+// Generated automatically in the Url Model
 protected static function booted(): void
 {
     static::creating(function (Url $url) {
@@ -298,39 +298,39 @@ protected static function booted(): void
 }
 ```
 
-## 🧪 Testes
+## 🧪 Tests
 
-### Executar testes
+### Run tests
 
 ```bash
 php artisan test
 ```
 
-### Executar com cobertura
+### Run with coverage
 
 ```bash
 php artisan test --coverage
 ```
 
-### Usar Factory para testes
+### Use Factory for tests
 
 ```bash
 php artisan tinker
 ```
 
 ```php
-// Criar 10 URLs de teste
+// Create 10 test URLs
 Url::factory()->count(10)->create();
 
-// Criar com dados específicos
+// Create with specific data
 Url::factory()->create([
   'url' => 'https://example.com',
 ]);
 ```
 
-## 🚀 Exemplo de Uso Completo
+## 🚀 Complete Usage Example
 
-### 1. Criar uma URL curta
+### 1. Create a shortened URL
 
 ```bash
 curl -X POST http://localhost:8000/api/url \
@@ -352,19 +352,19 @@ curl -X POST http://localhost:8000/api/url \
 }
 ```
 
-### 2. Listar todas as URLs
+### 2. List all URLs
 
 ```bash
 curl -X GET http://localhost:8000/api/url
 ```
 
-### 3. Obter uma URL específica
+### 3. Get a specific URL
 
 ```bash
 curl -X GET http://localhost:8000/api/url/1
 ```
 
-### 4. Atualizar uma URL
+### 4. Update a URL
 
 ```bash
 curl -X PUT http://localhost:8000/api/url/1 \
@@ -374,76 +374,76 @@ curl -X PUT http://localhost:8000/api/url/1 \
   }'
 ```
 
-### 5. Deletar uma URL
+### 5. Delete a URL
 
 ```bash
 curl -X DELETE http://localhost:8000/api/url/1
 ```
 
-## 📝 Variáveis de Validação
+## 📝 Validation Rules
 
-As URLs são validadas com as seguintes regras:
+URLs are validated with the following rules:
 
-- `required`: Campo obrigatório
-- `url`: Deve ser uma URL válida
-- `max:2048`: Comprimento máximo de 2048 caracteres
-- `unique:urls,url`: A URL não pode ser duplicada no banco de dados
+- `required`: Field is mandatory
+- `url`: Must be a valid URL
+- `max:2048`: Maximum length of 2048 characters
+- `unique:urls,url`: The URL cannot be duplicated in the database
 
-## 🔧 Configuração avançada
+## 🔧 Advanced Configuration
 
-### Modificar comprimento do código curto
+### Change short code length
 
-Para alterar o comprimento do código gerado (padrão: 6 caracteres), edite [app/Models/Url.php](app/Models/Url.php):
+To change the generated code length (default: 6 characters), edit [app/Models/Url.php](app/Models/Url.php):
 
 ```php
-// Alterar de 6 para outro valor
-$code = Str::random(8); // Para 8 caracteres
+// Change from 6 to another value
+$code = Str::random(8); // For 8 characters
 ```
 
-### Customizar prefixo da URL curta
+### Customize short URL prefix
 
-Para adicionar um prefixo personalizado às URLs curtas, modifique o método `store` em [app/Http/Controllers/UrlController.php](app/Http/Controllers/UrlController.php):
+To add a custom prefix to shortened URLs, modify the `store` method in [app/Http/Controllers/UrlController.php](app/Http/Controllers/UrlController.php):
 
 ```php
-'short_url' => url('s/' . $url->short_url), // Adiciona prefixo /s/
+'short_url' => url('s/' . $url->short_url), // Adds /s/ prefix
 ```
 
 ## 🐛 Troubleshooting
 
-### Erro: "The application does not have a default cache, database, or queue connection set."
+### Error: "The application does not have a default cache, database, or queue connection set."
 
-Solução: Configure o arquivo `.env`:
+Solution: Configure the `.env` file:
 ```env
 CACHE_DRIVER=file
 SESSION_DRIVER=file
 QUEUE_CONNECTION=sync
 ```
 
-### Erro: "SQLSTATE[HY000]: General error: 1 no such table: urls"
+### Error: "SQLSTATE[HY000]: General error: 1 no such table: urls"
 
-Solução: Execute as migrações:
+Solution: Run the migrations:
 ```bash
 php artisan migrate
 ```
 
-### Erro: "The POST method is not supported for this route"
+### Error: "The POST method is not supported for this route"
 
-Verificar se está usando o método HTTP correto e a URL correta: `POST /api/url`
+Check if you are using the correct HTTP method and URL: `POST /api/url`
 
-## 📚 Referências
+## 📚 References
 
-- [Documentação Laravel](https://laravel.com/docs)
+- [Laravel Documentation](https://laravel.com/docs)
 - [Laravel Sanctum](https://laravel.com/docs/sanctum)
 - [Eloquent ORM](https://laravel.com/docs/eloquent)
 
-## 📄 Licença
+## 📄 License
 
-Este projeto é licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
-## 👤 Autor
+## 👤 Author
 
-Desenvolvido como uma API de demonstração para gerenciamento de URLs curtas.
+Developed as a demonstration API for managing shortened URLs.
 
 ---
 
-**Última atualização:** 27 de abril de 2026
+**Last updated:** April 27, 2026
