@@ -435,6 +435,7 @@ Check if you are using the correct HTTP method and URL: `POST /api/url`
 - [Laravel Documentation](https://laravel.com/docs)
 - [Laravel Sanctum](https://laravel.com/docs/sanctum)
 - [Eloquent ORM](https://laravel.com/docs/eloquent)
+- [https://roadmap.sh/projects/url-shortening-service]
 
 ## 📄 License
 
